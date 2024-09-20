@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Monedas para Videojuegos</title>
+    <style>
+        body {
+            margin: 0 auto;
+            padding: 20px;
+            background-image: url(pattern.png);
+        }
+        h1 {
+            color: rgb(174, 96, 247);
+            text-align: center;
+        }
+        nav {
+            background-color: rgb(174, 96, 247);
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="pie.png"/>
+        </nav>
+    </header>
+    <h1>Calculadora de Monedas para Videojuegos</h1>
+    <form id="calculadoraForm">
+        <label for="misiones">Misiones completadas:</label>
+        <input type="number" id="misiones" name="misiones" placeholder="Escribe la cantidad">
+        
+        <label for="enemigos">Cantidad de enemigos derrotados:</label>
+        <input type="number" id="enemigos" name="enemigos" placeholder="Escribe la cantidad">
+        
+        <label for="recompensa">Tipo de recompensa:</label>
+        <select id="recompensa" name="recompensa" required>
+            <option value="oro">Monedas de oro</option>
+            <option value="gemas">Gemas</option>
+            <option value="experiencia">Puntos de experiencia</option>
+        </select>
+        
+        <button type="submit">Calcular</button>
+    </form>
+    
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('calculadoraForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const misiones = parseInt(document.getElementById('misiones').value);
+            const enemigos = parseInt(document.getElementById('enemigos').value);
+            const recompensa = document.getElementById('recompensa').value;
+            
+            let total = 0;
+            
+            switch(recompensa) {
+                case 'oro':
+                    total = misiones * 100 + enemigos * 10;
+                    break;
+                case 'gemas':
+                    total = misiones * 5 + enemigos * 1;
+                    break;
+                case 'experiencia':
+                    total = misiones * 500 + enemigos * 100;
+                    break;
+            }
+            
+            const resultadoTexto = `Total de ${recompensa}: ${total}`;
+            document.getElementById('resultado').textContent = resultadoTexto;
+        });
+    </script>
+</body>
+</html>
